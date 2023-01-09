@@ -1,2 +1,1 @@
-# practice-node-mysql
-Practice Node - Express + MySQL
+# Practice Node - Express + MySQL
