@@ -1,18 +1,17 @@
 const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
-const dotenv = require("dotenv");
 const swaggerUI = require("swagger-ui-express");
 const swaggerJsDoc = require("swagger-jsdoc");
 const cookieParse = require("cookie-parser");
-// const routing = require("./routes");
-const sequelize = require("./configs/connectDatabase");
+const routing = require("./routes");
+const app = express();
+
+require("dotenv").config();
+require("./configs/connectDatabase");
 const PORT = process.env.PORT || 4000;
 
-const app = express();
-dotenv.config();
-
-// Config Swagger
+// Swagger
 const swaggerOptions = {
 	definition: {
 		openapi: "3.0.3",
@@ -27,7 +26,7 @@ const swaggerOptions = {
 			}
 		]
 	},
-	apis: []
+	apis: ["src/routes/paypaldeposit.js"]
 };
 const swaggerSpecs = swaggerJsDoc(swaggerOptions);
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerSpecs));
@@ -39,7 +38,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cookieParse());
 
-// routing(app);
+routing(app);
 
 app.listen(PORT, () => {
 	console.log(`Server is listening at http://localhost:${PORT}/`);

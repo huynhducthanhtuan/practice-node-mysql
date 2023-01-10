@@ -1,23 +1,77 @@
-const { Sequelize, DataTypes } = require("sequelize");
+const { DataTypes } = require("sequelize");
 const sequelize = require("../configs/connectDatabase");
 
-const PaypalDeposit = sequelize.define("paypal_deposits", {
-	title: {
-		type: DataTypes.STRING,
-		allowNull: false
+const PaypalDeposit = sequelize.define(
+	"paypal_deposits",
+	{
+		id: {
+			type: DataTypes.STRING(100),
+			primaryKey: true,
+			allowNull: false
+		},
+		member_id: {
+			type: DataTypes.BIGINT,
+			allowNull: false
+		},
+		uid: {
+			type: DataTypes.STRING(30),
+			allowNull: false
+		},
+		currency_id: {
+			type: DataTypes.STRING(45),
+			allowNull: false
+		},
+		fee: {
+			type: DataTypes.DECIMAL(38, 14),
+			allowNull: false
+		},
+		amount: {
+			type: DataTypes.DECIMAL(38, 14),
+			allowNull: false
+		},
+		state: {
+			type: DataTypes.STRING(30),
+			allowNull: false
+		},
+		type: {
+			type: DataTypes.STRING(30),
+			allowNull: true
+		},
+		created_at: {
+			type: DataTypes.DATE,
+			defaultValue: DataTypes.NOW,
+			allowNull: false
+		},
+		updated_at: {
+			type: DataTypes.DATE,
+			defaultValue: DataTypes.NOW,
+			allowNull: false
+		},
+		completed_at: {
+			type: DataTypes.DATE,
+			defaultValue: DataTypes.NOW,
+			allowNull: false
+		},
+		payment_id: {
+			type: DataTypes.STRING(200),
+			allowNull: true
+		},
+		token: {
+			type: DataTypes.STRING(200),
+			allowNull: true
+		},
+		payer_id: {
+			type: DataTypes.STRING(200),
+			allowNull: true
+		},
+		payment_link: {
+			type: DataTypes.STRING(255),
+			allowNull: false
+		}
 	},
-	subject: {
-		type: DataTypes.INTEGER
+	{
+		timestamps: false
 	}
-});
-
-sequelize
-	.sync()
-	.then(() => {
-		console.log("Create table paypal_deposits successfully");
-	})
-	.catch((error) => {
-		console.error("Create table paypal_deposits failed: ", error);
-	});
+);
 
 module.exports = PaypalDeposit;

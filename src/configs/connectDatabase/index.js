@@ -1,6 +1,5 @@
 const Sequelize = require("sequelize");
-const dotenv = require("dotenv");
-dotenv.config();
+require("dotenv").config();
 
 const {
 	DATABASE_NAME,
@@ -16,17 +15,16 @@ const sequelize = new Sequelize(
 	DATABASE_PASSWORD,
 	{
 		host: DATABASE_HOST,
-		dialect: DATABASE_DIALECT
+		dialect: DATABASE_DIALECT,
+		dialectOptions: {
+			supportBigNumbers: true
+		}
 	}
 );
 
 sequelize
 	.authenticate()
-	.then(() => {
-		console.log("Connect database successfully");
-	})
-	.catch((error) => {
-		console.error("Connect database failed: ", error);
-	});
+	.then(() => console.log("Connect database successfully"))
+	.catch((error) => console.error("Connect database failed: ", error));
 
 module.exports = sequelize;
