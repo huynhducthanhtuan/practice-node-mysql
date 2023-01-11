@@ -49,7 +49,7 @@ router.get("/:id", PaypalDepositController.getDetailPaypalDeposit);
  *             type: object
  *             required:
  *               - id
- *               - uid
+ *               - uuid
  *               - member_id
  *               - currency_id
  *               - fee
@@ -58,7 +58,7 @@ router.get("/:id", PaypalDepositController.getDetailPaypalDeposit);
  *             properties:
  *               id:
  *                  type: string
- *               uid:
+ *               uuid:
  *                  type: string
  *               member_id:
  *                  type: string
@@ -72,7 +72,7 @@ router.get("/:id", PaypalDepositController.getDetailPaypalDeposit);
  *                  type: string
  *             example:
  *               id: "1"
- *               uid: "IDFD44832DA0"
+ *               uuid: "IDFD44832DA0"
  *               member_id: "1"
  *               currency_id: "paypal"
  *               fee: "0"

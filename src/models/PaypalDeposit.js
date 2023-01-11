@@ -1,4 +1,4 @@
-const { DataTypes } = require("sequelize");
+const { Sequelize, DataTypes } = require("sequelize");
 const sequelize = require("../configs/connectDatabase");
 
 const PaypalDeposit = sequelize.define(
@@ -7,9 +7,13 @@ const PaypalDeposit = sequelize.define(
 		id: {
 			type: DataTypes.BIGINT,
 			primaryKey: true,
+			autoIncrement: true,
+			// defaultValue: 0,
 			allowNull: false
 		},
-		uid: {
+		uuid: {
+			// type: Sequelize.UUID,
+			// defaultValue: Sequelize.UUIDV4,
 			type: DataTypes.STRING(30),
 			allowNull: false
 		},
@@ -48,5 +52,12 @@ const PaypalDeposit = sequelize.define(
 		timestamps: false
 	}
 );
+
+sequelize
+	.sync()
+	.then(() => console.log("Create table paypal_deposits successfully"))
+	.catch((error) =>
+		console.error("Create table paypal_deposits failed: ", error)
+	);
 
 module.exports = PaypalDeposit;
