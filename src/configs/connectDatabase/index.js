@@ -18,7 +18,8 @@ const sequelize = new Sequelize(
 		dialect: DATABASE_DIALECT,
 		dialectOptions: {
 			supportBigNumbers: true
-		}
+		},
+		logging: false
 	}
 );
 

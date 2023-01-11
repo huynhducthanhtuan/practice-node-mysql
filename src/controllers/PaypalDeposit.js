@@ -1,11 +1,12 @@
 const {
-	getListOfPaypalDeposit,
-	getDetailOfPaypalDeposit
+	getPaypalDepositList,
+	getDetailPaypalDeposit,
+	createNewPaypalDeposit
 } = require("../services");
 
 function PaypalDepositController() {
 	this.getPaypalDepositList = async (req, res, next) => {
-		await getListOfPaypalDeposit()
+		await getPaypalDepositList()
 			.then((datas) => {
 				datas.length === 0
 					? res.status(400).json({
@@ -32,10 +33,7 @@ function PaypalDepositController() {
 	};
 
 	this.getDetailPaypalDeposit = async (req, res, next) => {
-		const id = req.params.id;
-		console.log("id: " + id);
-
-		await getDetailOfPaypalDeposit(id)
+		await getDetailPaypalDeposit(req)
 			.then((data) => {
 				res.status(200).json({
 					message: "successfully",
@@ -50,6 +48,23 @@ function PaypalDepositController() {
 					data: null
 				})
 			);
+	};
+
+	this.createNewPaypalDeposit = async (req, res, next) => {
+		await createNewPaypalDeposit(req)
+			.then(() => {
+				res.status(200).json({
+					message: "successfully",
+					error: null
+				});
+			})
+			.catch((error) => {
+				console.log(error);
+				res.status(400).json({
+					message: "failed",
+					error: error
+				});
+			});
 	};
 }
 

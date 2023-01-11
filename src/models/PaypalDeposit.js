@@ -5,16 +5,16 @@ const PaypalDeposit = sequelize.define(
 	"paypal_deposits",
 	{
 		id: {
-			type: DataTypes.STRING(100),
-			primaryKey: true,
-			allowNull: false
-		},
-		member_id: {
 			type: DataTypes.BIGINT,
+			primaryKey: true,
 			allowNull: false
 		},
 		uid: {
 			type: DataTypes.STRING(30),
+			allowNull: false
+		},
+		member_id: {
+			type: DataTypes.BIGINT,
 			allowNull: false
 		},
 		currency_id: {
@@ -22,20 +22,16 @@ const PaypalDeposit = sequelize.define(
 			allowNull: false
 		},
 		fee: {
-			type: DataTypes.DECIMAL(38, 14),
+			type: DataTypes.DOUBLE,
 			allowNull: false
 		},
 		amount: {
-			type: DataTypes.DECIMAL(38, 14),
+			type: DataTypes.DOUBLE,
 			allowNull: false
 		},
 		state: {
 			type: DataTypes.STRING(30),
 			allowNull: false
-		},
-		type: {
-			type: DataTypes.STRING(30),
-			allowNull: true
 		},
 		created_at: {
 			type: DataTypes.DATE,
@@ -45,27 +41,6 @@ const PaypalDeposit = sequelize.define(
 		updated_at: {
 			type: DataTypes.DATE,
 			defaultValue: DataTypes.NOW,
-			allowNull: false
-		},
-		completed_at: {
-			type: DataTypes.DATE,
-			defaultValue: DataTypes.NOW,
-			allowNull: false
-		},
-		payment_id: {
-			type: DataTypes.STRING(200),
-			allowNull: true
-		},
-		token: {
-			type: DataTypes.STRING(200),
-			allowNull: true
-		},
-		payer_id: {
-			type: DataTypes.STRING(200),
-			allowNull: true
-		},
-		payment_link: {
-			type: DataTypes.STRING(255),
 			allowNull: false
 		}
 	},
