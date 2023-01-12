@@ -53,11 +53,4 @@ const PaypalDeposit = sequelize.define(
 	}
 );
 
-sequelize
-	.sync()
-	.then(() => console.log("Create table paypal_deposits successfully"))
-	.catch((error) =>
-		console.error("Create table paypal_deposits failed: ", error)
-	);
-
 module.exports = PaypalDeposit;

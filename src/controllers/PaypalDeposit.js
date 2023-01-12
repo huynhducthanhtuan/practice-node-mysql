@@ -2,7 +2,8 @@ const {
 	getPaypalDepositList,
 	getDetailPaypalDeposit,
 	createNewPaypalDeposit,
-	updatePaypalDeposit
+	updatePaypalDeposit,
+	deletePaypalDeposit
 } = require("../services");
 
 function PaypalDepositController() {
@@ -23,14 +24,14 @@ function PaypalDepositController() {
 							datas: datas
 					  });
 			})
-			.catch((error) =>
+			.catch((error) => {
 				res.status(400).json({
 					message: "failed",
 					error: error,
 					datasLength: 0,
 					datas: null
-				})
-			);
+				});
+			});
 	};
 
 	this.getDetailPaypalDeposit = async (req, res, next) => {
@@ -42,13 +43,13 @@ function PaypalDepositController() {
 					data: data
 				});
 			})
-			.catch((error) =>
+			.catch((error) => {
 				res.status(400).json({
 					message: "failed",
 					error: error,
 					data: null
-				})
-			);
+				});
+			});
 	};
 
 	this.createNewPaypalDeposit = async (req, res, next) => {
@@ -60,7 +61,6 @@ function PaypalDepositController() {
 				});
 			})
 			.catch((error) => {
-				console.log(error);
 				res.status(400).json({
 					message: "failed",
 					error: error
@@ -70,14 +70,39 @@ function PaypalDepositController() {
 
 	this.updatePaypalDeposit = async (req, res, next) => {
 		await updatePaypalDeposit(req)
-			.then(() => {
-				res.status(200).json({
-					message: "successfully",
-					error: null
-				});
+			.then((isUpdated) => {
+				isUpdated
+					? res.status(200).json({
+							message: "successfully",
+							error: null
+					  })
+					: res.status(400).json({
+							message: "failed",
+							error: null
+					  });
 			})
 			.catch((error) => {
-				console.log(error);
+				res.status(400).json({
+					message: "failed",
+					error: error
+				});
+			});
+	};
+
+	this.deletePaypalDeposit = async (req, res, next) => {
+		await deletePaypalDeposit(req)
+			.then((isDeleted) => {
+				isDeleted
+					? res.status(200).json({
+							message: "successfully",
+							error: null
+					  })
+					: res.status(400).json({
+							message: "failed",
+							error: null
+					  });
+			})
+			.catch((error) => {
 				res.status(400).json({
 					message: "failed",
 					error: error

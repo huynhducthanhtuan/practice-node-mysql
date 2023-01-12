@@ -22,7 +22,9 @@ const getDetailPaypalDeposit = async (req) => {
 	});
 
 	/* sequelize.query */
-	// const result = await sequelize.query(
+	// const id = req.params.id;
+
+	// const paypalDeposits = await sequelize.query(
 	// 	"SELECT * FROM `paypal_deposits` WHERE id = :id",
 	// 	{
 	// 		replacements: { id: id },
@@ -30,7 +32,7 @@ const getDetailPaypalDeposit = async (req) => {
 	// 	}
 	// );
 
-	// return result[0];
+	// return paypalDeposits[0];
 };
 
 const createNewPaypalDeposit = async (req) => {
@@ -52,33 +54,61 @@ const createNewPaypalDeposit = async (req) => {
 
 const updatePaypalDeposit = async (req) => {
 	/* Model method */
-	// const id = req.params.id;
+	const id = req.params.id;
 
-	// await PaypalDepositModel.update(
-	// 	{ ...req.body, updated_at: new Date() },
-	// 	{
-	// 		where: { id: id }
-	// 	}
-	// );
+	const isUpdated = await PaypalDepositModel.update(
+		{ ...req.body, updated_at: new Date() },
+		{ where: { id: id } }
+	);
+
+	return Boolean(isUpdated);
 
 	/* sequelize.query */
+	// const id = req.params.id;
+	// const { member_id, currency_id, fee, amount, state } = req.body;
+
+	// const sql = `
+	// 	UPDATE paypal_deposits
+	// 	SET member_id='${member_id}', currency_id='${currency_id}', fee='${fee}', amount='${amount}', state='${state}'
+	// 	WHERE id='${id}'
+	// `;
+
+	// const result = await sequelize.query(sql, {
+	// 	type: QueryTypes.UPDATE
+	// });
+
+	// return Boolean(result[1]);
+};
+
+const deletePaypalDeposit = async (req) => {
+	/* Model method */
 	const id = req.params.id;
-	const { member_id, currency_id, fee, amount, state } = req.body;
 
-	const sql = `
-		UPDATE paypal_deposits 
-		SET member_id='${member_id}', currency_id='${currency_id}', fee='${fee}', amount='${amount}', state='${state}')
-		WHERE id='${id}'
-	`;
-
-	await sequelize.query(sql, {
-		type: QueryTypes.INSERT
+	const resultCode = await PaypalDepositModel.destroy({
+		where: { id: id }
 	});
+
+	return Boolean(resultCode);
+
+	/* sequelize.query */
+	// const id = req.params.id;
+
+	// const sql = `
+	// 	DELETE FROM paypal_deposits
+	// 	WHERE id='${id}'
+	// `;
+
+	// await sequelize.query(sql, {
+	// 	type: QueryTypes.DELETE
+	// });
+
+	// return true;
 };
 
 module.exports = {
 	getPaypalDepositList,
 	getDetailPaypalDeposit,
 	createNewPaypalDeposit,
-	updatePaypalDeposit
+	updatePaypalDeposit,
+	deletePaypalDeposit
 };

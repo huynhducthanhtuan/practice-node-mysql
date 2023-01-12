@@ -6,7 +6,7 @@ const { PaypalDepositController } = require("../controllers");
  * @swagger
  * /api/paypal-deposit/list:
  *   get:
- *     description: Get paypal deposit list
+ *     description: Get Paypal Deposit List
  *     tags: [Paypal Deposit]
  *     responses:
  *       200:
@@ -20,7 +20,7 @@ router.get("/list", PaypalDepositController.getPaypalDepositList);
  * @swagger
  * /api/paypal-deposit/{id}:
  *   get:
- *     description: Get paypal deposit detail
+ *     description: Get Paypal Deposit Detail
  *     tags: [Paypal Deposit]
  *     parameters:
  *        - name: id
@@ -40,7 +40,7 @@ router.get("/:id", PaypalDepositController.getDetailPaypalDeposit);
  * @swagger
  * /api/paypal-deposit/create:
  *   post:
- *     description: Create new paypal deposit
+ *     description: Create New Paypal Deposit
  *     tags: [Paypal Deposit]
  *     requestBody:
  *       content:
@@ -86,7 +86,7 @@ router.post("/create", PaypalDepositController.createNewPaypalDeposit);
  * @swagger
  * /api/paypal-deposit/update/{id}:
  *   patch:
- *     description: Update paypal deposit
+ *     description: Update Paypal Deposit
  *     tags: [Paypal Deposit]
  *     parameters:
  *        - name: id
@@ -123,5 +123,25 @@ router.post("/create", PaypalDepositController.createNewPaypalDeposit);
  *         description: Update paypal deposit failed
  */
 router.patch("/update/:id", PaypalDepositController.updatePaypalDeposit);
+
+/**
+ * @swagger
+ * /api/paypal-deposit/delete/{id}:
+ *   delete:
+ *     description: Delete Paypal Deposit
+ *     tags: [Paypal Deposit]
+ *     parameters:
+ *        - name: id
+ *          in: path
+ *          description: Paypal Deposit ID
+ *          type: string
+ *          required: true
+ *     responses:
+ *       200:
+ *         description: Delete paypal deposit successfully
+ *       400:
+ *         description: Delete paypal deposit failed
+ */
+router.delete("/delete/:id", PaypalDepositController.deletePaypalDeposit);
 
 module.exports = router;
