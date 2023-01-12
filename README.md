@@ -1,1 +1,1 @@
-# Practice Node - Express + MySQL
+# Practice Node - Express - Sequelize - MySQL

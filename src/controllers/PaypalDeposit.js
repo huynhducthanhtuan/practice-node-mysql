@@ -1,7 +1,8 @@
 const {
 	getPaypalDepositList,
 	getDetailPaypalDeposit,
-	createNewPaypalDeposit
+	createNewPaypalDeposit,
+	updatePaypalDeposit
 } = require("../services");
 
 function PaypalDepositController() {
@@ -52,6 +53,23 @@ function PaypalDepositController() {
 
 	this.createNewPaypalDeposit = async (req, res, next) => {
 		await createNewPaypalDeposit(req)
+			.then(() => {
+				res.status(200).json({
+					message: "successfully",
+					error: null
+				});
+			})
+			.catch((error) => {
+				console.log(error);
+				res.status(400).json({
+					message: "failed",
+					error: error
+				});
+			});
+	};
+
+	this.updatePaypalDeposit = async (req, res, next) => {
+		await updatePaypalDeposit(req)
 			.then(() => {
 				res.status(200).json({
 					message: "successfully",

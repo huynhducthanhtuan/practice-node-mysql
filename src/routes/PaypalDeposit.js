@@ -49,7 +49,6 @@ router.get("/:id", PaypalDepositController.getDetailPaypalDeposit);
  *             type: object
  *             required:
  *               - id
- *               - uuid
  *               - member_id
  *               - currency_id
  *               - fee
@@ -57,8 +56,6 @@ router.get("/:id", PaypalDepositController.getDetailPaypalDeposit);
  *               - state
  *             properties:
  *               id:
- *                  type: string
- *               uuid:
  *                  type: string
  *               member_id:
  *                  type: string
@@ -72,7 +69,6 @@ router.get("/:id", PaypalDepositController.getDetailPaypalDeposit);
  *                  type: string
  *             example:
  *               id: "1"
- *               uuid: "IDFD44832DA0"
  *               member_id: "1"
  *               currency_id: "paypal"
  *               fee: "0"
@@ -85,5 +81,47 @@ router.get("/:id", PaypalDepositController.getDetailPaypalDeposit);
  *         description: Create new paypal deposit failed
  */
 router.post("/create", PaypalDepositController.createNewPaypalDeposit);
+
+/**
+ * @swagger
+ * /api/paypal-deposit/update/{id}:
+ *   patch:
+ *     description: Update paypal deposit
+ *     tags: [Paypal Deposit]
+ *     parameters:
+ *        - name: id
+ *          in: path
+ *          description: Paypal Deposit ID
+ *          type: string
+ *          required: true
+ *     requestBody:
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               member_id:
+ *                  type: string
+ *               currency_id:
+ *                  type: string
+ *               fee:
+ *                  type: string
+ *               amount:
+ *                  type: string
+ *               state:
+ *                  type: string
+ *             example:
+ *               member_id: "1"
+ *               currency_id: "paypal"
+ *               fee: "0"
+ *               amount: "0"
+ *               state: "processing"
+ *     responses:
+ *       200:
+ *         description: Update paypal deposit successfully
+ *       400:
+ *         description: Update paypal deposit failed
+ */
+router.patch("/update/:id", PaypalDepositController.updatePaypalDeposit);
 
 module.exports = router;

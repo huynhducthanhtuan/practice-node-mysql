@@ -1,24 +1,24 @@
-const { Sequelize, DataTypes } = require("sequelize");
 const sequelize = require("../configs/connectDatabase");
+const { Sequelize, DataTypes } = require("sequelize");
 
 const PaypalDeposit = sequelize.define(
 	"paypal_deposits",
 	{
 		id: {
-			type: DataTypes.BIGINT,
+			type: DataTypes.INTEGER,
 			primaryKey: true,
 			autoIncrement: true,
-			// defaultValue: 0,
+			defaultValue: 1,
+			initialAutoIncrement: 1,
 			allowNull: false
 		},
 		uuid: {
-			// type: Sequelize.UUID,
-			// defaultValue: Sequelize.UUIDV4,
-			type: DataTypes.STRING(30),
+			type: Sequelize.UUID,
+			defaultValue: Sequelize.UUIDV4,
 			allowNull: false
 		},
 		member_id: {
-			type: DataTypes.BIGINT,
+			type: DataTypes.INTEGER,
 			allowNull: false
 		},
 		currency_id: {
