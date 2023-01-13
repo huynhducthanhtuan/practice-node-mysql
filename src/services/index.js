@@ -37,19 +37,28 @@ const getDetailPaypalDeposit = async (req) => {
 
 const createNewPaypalDeposit = async (req) => {
 	/* Model method */
-	await PaypalDepositModel.create(req.body);
+	// await PaypalDepositModel.create({
+	// 	...req.body,
+	// 	id: (await PaypalDepositModel.max("id")) + 1
+	// });
 
 	/* sequelize.query */
-	// const { id, member_id, currency_id, fee, amount, state } = req.body;
+	const { member_id, currency_id, fee, amount, state } = req.body;
+	const maxId = await sequelize.query(
+		"SELECT MAX(ID) AS maxId FROM `paypal_deposits`",
+		{ type: QueryTypes.SELECT }
+	);
+	const id = maxId[0].maxId + 1;
+	const uuid = uuidv4();
 
-	// const sql = `
-	// 	INSERT INTO paypal_deposits (id, uuid, member_id, currency_id, fee, amount, state)
-	// 	VALUES ('${id}', '${uuidv4()}', '${member_id}', '${currency_id}', '${fee}', '${amount}', '${state}');
-	// `;
+	const sql = `
+		INSERT INTO paypal_deposits (id, uuid, member_id, currency_id, fee, amount, state)
+		VALUES ('${id}', '${uuid}', '${member_id}', '${currency_id}', '${fee}', '${amount}', '${state}');
+	`;
 
-	// await sequelize.query(sql, {
-	// 	type: QueryTypes.INSERT
-	// });
+	await sequelize.query(sql, {
+		type: QueryTypes.INSERT
+	});
 };
 
 const updatePaypalDeposit = async (req) => {

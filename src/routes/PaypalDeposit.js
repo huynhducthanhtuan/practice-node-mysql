@@ -48,15 +48,12 @@ router.get("/:id", PaypalDepositController.getDetailPaypalDeposit);
  *           schema:
  *             type: object
  *             required:
- *               - id
  *               - member_id
  *               - currency_id
  *               - fee
  *               - amount
  *               - state
  *             properties:
- *               id:
- *                  type: string
  *               member_id:
  *                  type: string
  *               currency_id:
@@ -68,7 +65,6 @@ router.get("/:id", PaypalDepositController.getDetailPaypalDeposit);
  *               state:
  *                  type: string
  *             example:
- *               id: "1"
  *               member_id: "1"
  *               currency_id: "paypal"
  *               fee: "0"

@@ -7,9 +7,6 @@ const PaypalDeposit = sequelize.define(
 		id: {
 			type: DataTypes.INTEGER,
 			primaryKey: true,
-			autoIncrement: true,
-			defaultValue: 1,
-			initialAutoIncrement: 1,
 			allowNull: false
 		},
 		uuid: {
